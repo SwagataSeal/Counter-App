@@ -1,25 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import Stack from '@mui/material/Stack';
+import Button from '@mui/material/Button';
+import Container from '@mui/material/Container';
+import { Box } from '@mui/material';
+import { useSelector, useDispatch } from 'react-redux';
+import { incNumber, decNumber } from './action/index';
 
-function App() {
+export default function App() {
+  const myState = useSelector((state) => state.changeTheNumber);
+  const dispatch = useDispatch();
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <Container maxWidth="sm">
+        <h1>Counter App</h1>
+        <Box tp={3}>
+          <Stack spacing={2} direction="row">
+            <Button variant="contained" onClick={() => dispatch(decNumber())}>
+              -
+            </Button>
+            <Button variant="outlined">{myState}</Button>
+            <Button variant="contained" onClick={() => dispatch(incNumber())}>
+              +
+            </Button>
+          </Stack>
+        </Box>
+      </Container>
     </div>
   );
 }
-
-export default App;
